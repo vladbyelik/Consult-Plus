@@ -32,14 +32,14 @@
           <span class="icon-bar"></span>
         </button>
         <?php if ($site_name || $logo): ?>
-          <a href="<?php print $front_page; ?>" class="navbar-brand" rel="home" title="<?php print t('Home'); ?>">
+<!--          <a href="--><?php //print $front_page; ?><!--" class="navbar-brand" rel="home" title="--><?php //print t('Home'); ?><!--">-->
             <?php if ($logo): ?>
               <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" id="logo" />
             <?php endif; ?>
-            <?php if ($site_name): ?>
-              <span class="site-name"><?php print $site_name; ?></span>
-            <?php endif; ?>
-          </a>
+<!--            --><?php //if ($site_name): ?>
+<!--              <span class="site-name">--><?php //print $site_name; ?><!--</span>-->
+<!--            --><?php //endif; ?>
+<!--          </a>-->
         <?php endif; ?>
       </div> <!-- /.navbar-header -->
 
@@ -49,9 +49,6 @@
           <ul id="main-menu" class="menu nav navbar-nav">
             <?php print render($main_menu); ?>
           </ul>
-        <?php endif; ?>
-        <?php if ($search_form): ?>
-          <?php print $search_form; ?>
         <?php endif; ?>
       </div><!-- /.navbar-collapse -->
     </nav><!-- /.navbar -->
@@ -105,6 +102,12 @@
               <button>Subscribe</button>
           </form>
       </div>
+
+<!--      --><?php //if ($search_form): ?>
+<!--          --><?php //print $search_form; ?>
+<!--      --><?php //endif; ?>
+
+
       <ul class="navigation">
           <h3 class="list-headline">navigation</h3>
           <li>Home</li>
@@ -115,8 +118,8 @@
           <li>Contact us</li>
       </ul>
 
-      <ul class="industary">
-          <h3 class="list-headline">industary</h3>
+      <ul class="industry">
+          <h3 class="list-headline">industry</h3>
           <li>Education</li>
           <li>business</li>
           <li>realestate</li>
@@ -125,16 +128,17 @@
           <li>telicommunication</li>
           <li>much more</li>
       </ul>
-
-      <ul class="follow-us">
-          <h3 class="list-headline">follow-us</h3>
-          <li>Facebook</li>
-          <li>twitter</li>
-          <li>instagram</li>
-          <li>linkedin</li>
-          <li>google +</li>
-      </ul>
+      <?php if ($main_menu): ?>
+          <ul class="follow-us">
+              <h3 class="list-headline">follow us</h3>
+              <?php print render($main_menu); ?>
+          </ul>
+      <?php endif; ?>
   </div>
+
+
+
+
     <div class="container">
         <?php if ($copyright): ?>
             <small class="copyright pull-left"><?php print $copyright; ?></small>

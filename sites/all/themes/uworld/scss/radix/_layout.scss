@@ -43,6 +43,7 @@
       text-transform: uppercase;
       font-family: "Montserrat", sans-serif;
       letter-spacing: -0.7px;
+      margin: 0;
     }
     h2 {
       color: #343a3b;
@@ -50,6 +51,8 @@
       font-size: 32px;
       font-weight: 700;
       letter-spacing: -1.6px;
+      margin: 0 0 2rem;
+      text-transform: uppercase;
     }
     p {
       color: #838b8c;
@@ -57,6 +60,7 @@
       font-size: 15px;
       font-weight: 400;
       line-height: 28px;
+      margin: 3rem 0;
     }
     .link {
       width: 13rem;
@@ -86,6 +90,12 @@
   }
 }
 
+.navbar-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 #navbar-collapse {
   background-color: #ffffff;
   ul li a {
@@ -96,16 +106,22 @@
     font-weight: 400;
     line-height: 30px;
     text-transform: uppercase;
+    transition: 0.5s;
   }
   ul li a:hover {
     color: #ffac55;
   }
 }
 
+.navbar-brand {
+  height: auto;
+}
+
 #footer {
   background-color: #262829;
   .container {
     display: flex;
+    flex-wrap: wrap;
     padding: 9rem 0;
     ul li {
       list-style: none;
@@ -158,11 +174,15 @@
 
 }
 
+.list-headline {
+  margin: 0;
+}
+
 #main-menu {
   float: right;
 }
 
-.page-header, .search-form {
+.page-header {
   display: none;
 }
 
@@ -175,6 +195,7 @@
   flex-direction: row-reverse;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: 2rem;
   .views-row {
     width: 20rem;
     max-width: 100%;
@@ -267,10 +288,10 @@
   height: auto;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   background-color: #262829;
   div {
-    padding: 15px 30px;
+    padding: 0 30px;
     span {
       color: #ffffff;
       font-family: Montserrat, sans-serif;
@@ -282,18 +303,26 @@
   }
 }
 
+.follow-us {
+  width: 17rem;
+  li a {
+    color: #838b8c;
+  }
+}
 
 .navbar {
   margin: 0 auto;
   background-color: #ffffff;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
 .industry-block {
   background-image: url("../../assets/images/header.png");
   background-size: cover;
   background-position: center;
+  padding: 0 !important;
   .panel-pane .pane-content {
     width: 45rem;
     max-width: 100%;
@@ -325,6 +354,7 @@
       background-color: #03b6e7;
       columns: 2;
       padding: 0;
+      margin: 0;
       @media (max-width: 560px) {
         columns: 1;
         display: flex;
@@ -333,22 +363,29 @@
       }
       li {
         list-style: none;
-        height: 128px;
-        padding: 34px 28px 33px 40px;
+        height: 13rem;
+        padding: 3rem 4rem;
         color: #ffffff;
         font-family: Montserrat, sans-serif;
         font-size: 14px;
         font-weight: 400;
-        line-height: 30px;
+        line-height: 35px;
         text-transform: uppercase;
         letter-spacing: -0.14px;
+        transition: 0.4s;
         p {
-          width: 148px;
           height: 52px;
-
           border-radius: 25px;
         }
       }
+
+      li:last-child {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+
       li:last-child p {
         margin: 0;
         display: flex;
@@ -369,9 +406,45 @@
       li:hover {
         background-color: #00a6d3;
       }
+      .div {
+        display: flex;
+        justify-content: space-between;
+        width: 15rem;
+        padding-top: 1rem;
+        p a {
+          text-decoration: none;
+          font-size: 3rem;
+          color: #ffffff;
+        }
+      }
     }
   }
 }
+
+.icon {
+  background-repeat: no-repeat;
+}
+
+.education {
+  background-image: url("../../assets/images/icon_education.png");
+}
+
+.real-state {
+  background-image: url("../../assets/images/icon_real_estate.png");
+}
+
+.business {
+  background-image: url("../../assets/images/icon_business.png");
+}
+
+.banking {
+  background-image: url("../../assets/images/icon_banking.png");
+}
+
+.technology {
+  background-image: url("../../assets/images/icon_technology.png");
+}
+
 
 .testimonials-span {
   color: #ddf8ff;
@@ -380,10 +453,6 @@
   font-weight: 400;
   line-height: 28px;
   padding: 0 3rem;
-}
-.icon {
-  background-image: url("../../assets/images/icon_education.png");
-  background-repeat: no-repeat;
 }
 
 .panel-flexible-inside .container {
