@@ -1,0 +1,147 @@
+<?php
+
+/**
+ * @file
+ * Slick carousel integration, the last carousel you'll ever need.
+ */
+
+use Drupal\slick\SlickFormatter;
+use Drupal\slick\SlickLibrary;
+use Drupal\slick\SlickManager;
+use Drupal\slick\Entity\Slick;
+
+/**
+ * Returns one of the Slick objects mainly used by procedural hooks.
+ *
+ * @param string $key
+ *   Identifier of the service.
+ *
+ * @return class
+ *   The required Slick class instance.
+ */
+function slick($key = 'manager') {
+  static $manager;
+  static $formatter;
+  static $library;
+
+  if (!isset($manager)) {
+    $manager = new SlickManager();
+    $formatter = new SlickFormatter();
+  }
+
+  switch ($key) {
+    case 'formatter':
+      return $formatter;
+
+    case 'library':
+      if (!isset($library)) {
+        $library = new SlickLibrary($manager);
+      }
+      return $library;
+
+    default:
+      return $manager;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function slick_theme($existing, $type, $theme, $path) {
+  $themes = [];
+  foreach (['slick', 'slide', 'grid', 'thumbnail', 'vanilla', 'wrapper'] as $item) {
+    $key = $item == 'slick' ? $item : 'slick_' . $item;
+    $themes[$key] = [
+      'render element' => 'element',
+      'file' => 'slick.theme.inc',
+      'path' => $path . '/templates',
+    ];
+  }
+  return $themes;
+}
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function slick_ctools_plugin_api($owner, $api) {
+  if ($owner == 'slick' && $api == 'slick_optionset') {
+    return ['version' => 3];
+  }
+}
+
+/**
+ * Implements hook_hook_info().
+ */
+function slick_hook_info() {
+  $hooks['slick_skins_info'] = ['group' => 'slick'];
+  return $hooks;
+}
+
+/**
+ * Builds the slick as a structured array ready for drupal_render().
+ */
+function slick_pre_render($element) {
+  return slick()->preRender($element);
+}
+
+/**
+ * Builds the slick wrapper as a structured array ready for drupal_render().
+ */
+function slick_pre_render_wrapper($element) {
+  return slick()->preRenderWrapper($element);
+}
+
+/**
+ * Implements hook_library().
+ */
+function slick_library() {
+  return slick('library')->library();
+}
+
+/**
+ * Implements hook_libraries_info().
+ */
+function slick_libraries_info() {
+  return slick('library')->librariesInfo();
+}
+
+/**
+ * Implements hook_library_alter().
+ */
+function slick_library_alter(&$libraries, $extension) {
+  slick('library')->libraryAlter($libraries, $extension);
+}
+
+/**
+ * Returns a Slick optionset object identified by its name.
+ */
+function slick_optionset_load($id = 'default') {
+  return Slick::load($id);
+}
+
+/**
+ * Kept here to prevent accidental removal till we do so.
+ *
+ * @deprecated to be removed for SlickManager::attach()
+ */
+function slick_attach(array $attach, array $settings = []) {
+  return slick()->attach(array_merge($settings, $attach));
+}
+
+/**
+ * Kept here to prevent accidental removal till we do so.
+ *
+ * @deprecated to be removed for SlickManager::getOptionsetByGroupOptions()
+ */
+function slick_optionset_options($collection = '') {
+  return slick()->getOptionsetByGroupOptions($collection);
+}
+
+/**
+ * Remove BC layer once Slick Views, etc. has 3.x branch.
+ *
+ * @deprecated to be removed before/ post 3.x full release.
+ */
+if (slick()->config('deprecated', TRUE)) {
+  require_once dirname(__FILE__) . '/slick.deprecated.inc';
+}

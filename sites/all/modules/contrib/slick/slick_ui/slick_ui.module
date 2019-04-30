@@ -1,0 +1,123 @@
+<?php
+
+/**
+ * @file
+ * Provides Slick carousel configuration entity UI.
+ */
+
+use Drupal\slick_ui\Form\SlickSettingsForm;
+
+/**
+ * Returns one of the slick service objects mainly used by procedural hooks.
+ *
+ * @return class
+ *   The required Blazy class instance.
+ */
+function slick_ui() {
+  static $slick_ui;
+
+  if (!isset($slick_ui)) {
+    $slick_ui = new SlickSettingsForm(slick());
+  }
+
+  return $slick_ui;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function slick_ui_menu() {
+  $items['admin/config/media/slick/ui'] = [
+    'title' => 'UI',
+    'description' => 'Configure the Slick UI.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['slick_ui_build_form'],
+    'access arguments' => ['administer slick'],
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 3,
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_library().
+ */
+function slick_ui_library() {
+  $path = drupal_get_path('module', 'slick_ui');
+  $info = system_get_info('module', 'slick_ui');
+
+  $libraries['ui'] = [
+    'title' => 'Slick UI',
+    'website' => 'http://drupal.org/project/slick_ui',
+    'version' => empty($info['version']) ? '7.x-3.x' : $info['version'],
+    'css' => [
+      $path . '/css/slick.admin--vertical-tabs.css' => ['group' => CSS_THEME + 1],
+    ],
+    'dependencies' => [['blazy', 'admin']],
+  ];
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function slick_ui_ctools_plugin_directory($module, $plugin) {
+  if ($plugin == 'export_ui') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function slick_ui_permission() {
+  return [
+    'administer slick' => [
+      'title' => t('Administer the Slick carousel module'),
+    ],
+  ];
+}
+
+/**
+ * Form for Slick UI module settings.
+ */
+function slick_ui_build_form() {
+  return slick_ui()->buildForm();
+}
+
+/**
+ * Submit handler for slick_ui_settings_form().
+ */
+function slick_ui_submit_form($form, &$form_state) {
+  slick_ui()->submitForm($form, $form_state);
+}
+
+/**
+ * Handles AJAX switching the breakpoints based on the input value.
+ *
+ * This must be put outside the class (always available) for the AJAX to work
+ * when using namespaced classes.
+ */
+function slick_ui_add_breakpoints($form, $form_state) {
+  if (!empty($form_state['values']['breakpoints']) && $form_state['values']['breakpoints'] >= 6) {
+    drupal_set_message(t('You are trying to load too many Breakpoints. Try reducing it to reasonable numbers say, between 1 to 5.'));
+  }
+  return $form['responsives']['responsive'];
+}
+
+/**
+ * Implements hook_help().
+ */
+function slick_ui_help($path, $arg) {
+  if ($path == 'admin/help#slick_ui') {
+    $output = file_get_contents(dirname(dirname(__FILE__)) . '/docs/README.md');
+    $output .= file_get_contents(dirname(dirname(__FILE__)) . '/docs/CONTRIBUTION.md');
+    $output .= file_get_contents(dirname(dirname(__FILE__)) . '/docs/FAQS.md');
+    $output .= file_get_contents(dirname(dirname(__FILE__)) . '/docs/TROUBLESHOOTING.md');
+    $output .= file_get_contents(dirname(dirname(__FILE__)) . '/docs/UPGRADE.md');
+    return function_exists('_filter_markdown') ? _filter_markdown($output, NULL) : '<pre>' . $output . '</pre>';
+  }
+  return '';
+}

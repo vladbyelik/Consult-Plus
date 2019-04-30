@@ -1,0 +1,18 @@
+name = Slick Fields
+description = Adds a field display formatter for the Slick carousel.
+core = 7.x
+package = Slick
+
+autoload = TRUE
+registry_autoload[] = PSR-4
+
+dependencies[] = slick:slick (>= 3.x)
+
+; We have to add a fake version so Git checkouts do not fail Slick dependencies.
+version = 7.x-3.x
+
+; Information added by Drupal.org packaging script on 2019-04-27
+version = "7.x-3.0"
+core = "7.x"
+project = "slick"
+datestamp = "1556405591"

@@ -1,0 +1,15 @@
+name = Blazy UI
+description = Provides Blazy configuration UI.
+core = 7.x
+package = Blazy
+configure = admin/config/media/blazy
+dependencies[] = blazy:blazy
+
+autoload = TRUE
+registry_autoload[] = PSR-4
+
+; Information added by Drupal.org packaging script on 2019-04-27
+version = "7.x-1.0"
+core = "7.x"
+project = "blazy"
+datestamp = "1556406485"

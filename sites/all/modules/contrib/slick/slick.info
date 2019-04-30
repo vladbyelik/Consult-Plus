@@ -1,0 +1,23 @@
+name = Slick
+description = "Slick carousel, the last carousel you'll ever need."
+core = 7.x
+package = Slick
+
+autoload = TRUE
+registry_autoload[] = PSR-4
+
+dependencies[] = ctools:ctools
+dependencies[] = jquery_update:jquery_update
+dependencies[] = blazy:blazy
+
+test_dependencies[] = registry_autoload:registry_autoload
+files[] = tests/SlickCrudTest.test
+
+; Add a fake version so Git checkouts do not fail Slick dependencies.
+version = 7.x-3.x
+
+; Information added by Drupal.org packaging script on 2019-04-27
+version = "7.x-3.0"
+core = "7.x"
+project = "slick"
+datestamp = "1556405591"

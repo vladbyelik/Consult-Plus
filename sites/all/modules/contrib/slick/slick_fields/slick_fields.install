@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @file
+ * Installation actions for Slick fields.
+ */
+
+/**
+ * Helper function to update formatter type, executed once.
+ *
+ * @todo use batch for potential large scale slicks.
+ */
+function _slick_fields_update_formatter($type = 'image') {
+  module_load_include('inc', 'slick', 'includes/slick.update');
+
+  $instances = [];
+  $fields = field_read_fields(['type' => $type], ['include_inactive' => TRUE]);
+
+  // Bail out if no $fields, likely installed but no fields found.
+  if (empty($fields)) {
+    return;
+  }
+
+  foreach ($fields as $field) {
+    $instances = array_merge($instances, field_read_instances(['field_id' => $field['id']], ['include_inactive' => TRUE]));
+  }
+
+  // Bail out if no $instances, likely installed but no $instances found.
+  if (empty($instances)) {
+    return;
+  }
+
+  foreach ($instances as $instance) {
+    $update_instance = FALSE;
+    foreach ($instance['display'] as $view_mode => $display) {
+      // Changed deprecated formatter into the new one based on classes.
+      if ($display['type'] == 'slick') {
+        $update_instance = TRUE;
+        $instance['display'][$view_mode]['type'] = 'slick_' . $type;
+        _slick_update_formatter_settings($instance['display'][$view_mode]['settings']);
+      }
+    }
+    if ($update_instance) {
+      field_update_instance($instance);
+    }
+  }
+}
+
+/**
+ * Update and replace the old Slick 2.x file/ image formatters to Slick 3.x.
+ */
+function slick_fields_update_7300() {
+  foreach (['file', 'image'] as $key) {
+    if (module_exists($key)) {
+      _slick_fields_update_formatter($key);
+    }
+  }
+}
+
+/**
+ * Update and replace the old Slick 2.x entity formatters to Slick 3.x.
+ */
+function slick_fields_update_7301() {
+  foreach (['field_collection', 'paragraphs'] as $key) {
+    if (module_exists($key)) {
+      _slick_fields_update_formatter($key);
+    }
+  }
+
+  // Clear caches that might contain stale formatter displays.
+  cache_clear_all('*', 'cache_block', TRUE);
+  cache_clear_all('*', 'cache_page', TRUE);
+}

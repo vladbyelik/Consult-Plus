@@ -1,0 +1,116 @@
+<?php
+
+/**
+ * @file
+ * Provides fields integration for the Slick carousel.
+ */
+
+use Drupal\slick\SlickDefault;
+use Drupal\slick\Plugin\Field\FieldFormatter\SlickFormatterPlugin;
+
+/**
+ * Returns the slick fields object mainly used by procedural hooks.
+ *
+ * @return class
+ *   The SlickFormatterPlugin instance.
+ */
+function slick_fields() {
+  static $plugin;
+
+  if (!isset($plugin)) {
+    $manager   = slick();
+    $formatter = slick('formatter');
+    $plugin    = new SlickFormatterPlugin($formatter, $manager);
+  }
+  return $plugin;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function slick_fields_field_formatter_info() {
+  return slick_fields()->formatterInfo();
+}
+
+/**
+ * Implements hook_field_formatter_prepare_view().
+ */
+function slick_fields_field_formatter_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items, $displays) {
+  slick_fields()->prepareView($entity_type, $entities, $field, $instances, $items, $displays);
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function slick_fields_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  if ($items = array_filter($items)) {
+    $type = in_array($field['type'], SlickDefault::TEXTS) ? 'text' : $field['type'];
+    // @todo remove condition once deprecated formatter removed.
+    $formatter = slick_fields()->getFormatter($type, $field, $instance);
+    return $formatter ? $formatter->view($items, $langcode, $entity_type, $entity, $display) : [];
+  }
+  return [];
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function slick_fields_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  // The field is empty at admin/structure/file-types/manage/image/file-display,
+  // and this form is also loaded there via file_entity_file_formatter_info().
+  if (empty($field)) {
+    return [];
+  }
+
+  // @todo remove condition once deprecated formatter removed.
+  $type = in_array($field['type'], SlickDefault::TEXTS) ? 'text' : $field['type'];
+  $formatter = slick_fields()->getFormatter($type, $field, $instance);
+  return $formatter ? $formatter->buildSettingsForm($form, $form_state, $view_mode) : [];
+}
+
+/**
+ * Implements hook_file_formatter_info_alter().
+ */
+function slick_fields_file_formatter_info_alter(array &$info) {
+  // Prevents complication at file entity display for now.
+  foreach (['slick', 'slick_file', 'slick_image'] as $key) {
+    if (isset($info['file_field_' . $key])) {
+      unset($info['file_field_' . $key]);
+    }
+  }
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function slick_fields_field_formatter_settings_summary($field, $instance, $view_mode) {
+  // @todo remove condition once deprecated formatter removed.
+  $type = in_array($field['type'], SlickDefault::TEXTS) ? 'text' : $field['type'];
+  $formatter = slick_fields()->getFormatter($type, $field, $instance);
+  return $formatter ? $formatter->buildSettingsSummary($view_mode) : '';
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function slick_fields_entity_info_alter(&$entity_info) {
+  foreach ($entity_info as $key => $entity) {
+    if (in_array($key, ['file', 'field_collection_item']) && !isset($entity_info[$key]['view modes']['slick_carousel'])) {
+      $entity_info[$key]['view modes']['slick_carousel'] = [
+        'label' => t('Slick carousel'),
+        'custom settings' => FALSE,
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_help().
+ */
+function slick_fields_help($path, $arg) {
+  if ($path == 'admin/help#slick_fields') {
+    $output = file_get_contents(dirname(__FILE__) . '/README.md');
+    return function_exists('_filter_markdown') ? _filter_markdown($output, NULL) : '<pre>' . $output . '</pre>';
+  }
+  return '';
+}

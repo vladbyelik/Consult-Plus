@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Provides Views plugins for Slick carousel.
+ */
+
+/**
+ * Implements hook_views_api().
+ */
+function slick_views_views_api() {
+  return ['api' => 3];
+}
+
+/**
+ * Preprocess variables for theme_slick_wrapper(), or slick-wrapper.tpl.php.
+ */
+function slick_views_preprocess_slick_wrapper(&$variables) {
+  $settings = $variables['settings'];
+
+  // Add specific suggestions that can override the default implementation.
+  // More relevant to Slick Views template suggestions as provided at Views UI
+  // since we don't register this theme via Views, else otherwise breaking this.
+  if (!empty($settings['view_name']) && !empty($settings['_views'])) {
+    $suggestions[] = $settings['view_name'];
+    $suggestions[] = $settings['view_display'];
+    $suggestions[] = $settings['view_name'] . '__' . $settings['view_display'];
+    $suggestions[] = $settings['current_view_mode'];
+    $suggestions[] = $settings['view_name'] . '__' . $settings['current_view_mode'];
+    foreach ($suggestions as $suggestion) {
+      $variables['theme_hook_suggestions'][] = 'slick_wrapper__' . $suggestion;
+    }
+  }
+}
+
+/**
+ * Implements hook_help().
+ */
+function slick_views_help($path, $arg) {
+  if ($path == 'admin/help#slick_views') {
+    $output = file_get_contents(dirname(__FILE__) . '/README.md');
+    return function_exists('_filter_markdown') ? _filter_markdown($output, NULL) : '<pre>' . $output . '</pre>';
+  }
+  return '';
+}

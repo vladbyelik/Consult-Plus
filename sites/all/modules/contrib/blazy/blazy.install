@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * @file
+ * Installation actions for Blazy.
+ */
+
+use Drupal\blazy\BlazyDefault;
+
+/**
+ * Checks if Blazy can proceed the install.
+ */
+function _blazy_can_install() {
+  return function_exists('registry_autoload_boot') || function_exists('xautoload') || function_exists('autoload');
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function blazy_requirements($phase) {
+  $requirements = [];
+  // Ensure translations do not break at install time.
+  $t = get_t();
+
+  // Must also prevent any class from being initiated as .module file is loaded
+  // even during install phase.
+  if ($phase == 'install') {
+    $exists = _blazy_can_install();
+    $requirements['blazy_autoloader'] = [
+      'title'       => $t('Blazy autoloader'),
+      'description' => $exists ? '' : $t('The Blazy module requires one of autoloader modules: <a href="@url1">registry_autoload</a>, <a href="@url2">autoload</a>, <a href="@url3">xautoload</a>.', [
+        '@url1' => 'https://dgo.to/registry_autoload',
+        '@url2' => 'https://dgo.to/autoload',
+        '@url3' => 'https://dgo.to/xautoload',
+      ]),
+      'severity'    => $exists ? REQUIREMENT_OK : REQUIREMENT_ERROR,
+      'value'       => $exists ? $t('installed') : $t('not installed'),
+    ];
+  }
+  elseif ($phase == 'runtime') {
+    $exists = function_exists('libraries_get_path') && is_file(libraries_get_path('blazy') . '/blazy.min.js');
+    $requirements['blazy_library'] = [
+      'title'       => $t('Blazy library'),
+      'description' => $exists ? '' : $t('The <a href="@url">Blazy library</a> should be installed at <strong>/sites/.../libraries/blazy/blazy.min.js</strong>, or any path supported by libraries.module.', ['@url' => 'https://github.com/dinbror/blazy']),
+      'severity'    => $exists ? REQUIREMENT_OK : REQUIREMENT_ERROR,
+      'value'       => $exists ? $t('Installed') : $t('Not installed'),
+    ];
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ */
+function blazy_install() {
+  if (_blazy_can_install()) {
+    variable_set('blazy.settings', BlazyDefault::formSettings());
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function blazy_uninstall() {
+  variable_del('blazy.settings');
+  db_delete('filter')
+    ->condition('module', 'blazy')
+    ->condition('name', 'blazy_filter')
+    ->execute();
+}

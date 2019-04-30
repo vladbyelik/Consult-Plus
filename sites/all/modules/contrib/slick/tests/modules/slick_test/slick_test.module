@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Testing Slick.
+ */
+
+/**
+ * Implements hook_slick_skins_info().
+ */
+function slick_test_slick_skins_info() {
+  return '\Drupal\slick_test\SlickSkinTest';
+}

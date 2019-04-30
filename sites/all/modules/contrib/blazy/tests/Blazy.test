@@ -1,0 +1,215 @@
+<?php
+
+use Drupal\blazy\Blazy;
+use Drupal\blazy\BlazyDefault;
+
+/**
+ * Tests the Blazy configuration options and permission controls.
+ *
+ * Usage:
+ * $ sudo -u www-data php ./scripts/run-tests.sh Blazy
+ * Or check Blazy tests at: admin/config/development/testing, and hit Run tests.
+ *
+ * @see https://www.drupal.org/simpletest-tutorial-drupal7
+ * @see https://www.drupal.org/node/645286
+ * @see https://www.drupal.org/node/265828
+ * @see https://www.drupal.org/project/ideas/issues/2232271
+ * @see DrupalTestCase
+ *
+ * @requires module registry_autoload
+ *
+ * @group Blazy
+ */
+class BlazyTest extends DrupalWebTestCase {
+
+  protected $adminUser;
+  protected $anyUser;
+
+  /**
+   * Provides info for the UI.
+   */
+  public static function getInfo() {
+    // Note: getInfo() strings are not translated with t().
+    return [
+      'name' => 'Blazy tests',
+      'description' => 'Tests the Blazy PSR-4, configuration and permission controls.',
+      'group' => 'Blazy',
+    ];
+  }
+
+  /**
+   * Overrides DrupalWebTestCase::setUp.
+   */
+  public function setUp() {
+    parent::setUp('file', 'image', 'libraries', 'registry_autoload', 'file_entity', 'media', 'blazy_ui', 'picture');
+
+    // Create users.
+    $this->adminUser = $this->drupalCreateUser(['administer blazy']);
+    $this->anyUser = $this->drupalCreateUser(['access administration pages']);
+  }
+
+  /**
+   * Tests Blazy permission.
+   *
+   * @covers \Drupal\blazy_ui\Form\BlazySettingsForm::buildForm
+   */
+  public function testAdminAccess() {
+
+    // Login as the admin user.
+    $this->drupalLogin($this->adminUser);
+
+    // Load admin page.
+    $this->drupalGet('admin/config/media/blazy');
+    $this->assertResponse(200, 'Administrative permission allows access to administration page.');
+
+    // Logout as admin user.
+    $this->drupalLogout();
+
+    // Login as any user.
+    $this->drupalLogin($this->anyUser);
+
+    // Attempt to load Blazy admin page.
+    $this->drupalGet('admin/config/media/blazy');
+    $this->assertResponse(403, 'Regular users do not have access to administer Blazy pages.');
+  }
+
+  /**
+   * Tests typecasting.
+   *
+   * @covers \Drupal\blazy_ui\Form\BlazySettingsForm::submitForm
+   * @covers \Drupal\blazy\BlazyManager::config
+   * @covers \Drupal\blazy\BlazyManager::typecast
+   */
+  public function testTypecast() {
+
+    // Login as the admin user.
+    $this->drupalLogin($this->adminUser);
+    $settings_path = 'admin/config/media/blazy';
+
+    // Load the form.
+    $this->drupalGet($settings_path);
+    $this->assertResponse(200, 'Administrative user can reach the "Blazy UI" form.');
+
+    // Test submitting the form.
+    // Enable Picture support which was disabled by default.
+    $edit['responsive_image'] = TRUE;
+    $this->drupalPost($settings_path, $edit, t('Save configuration'));
+
+    // We must have a Drupal standard message on saving a form.
+    $this->assertText(t('The configuration options have been saved.'), 'Blazy config has been updated.');
+
+    // Verifies that default values are set, and correctly typecast.
+    $config = blazy()->config();
+    $this->assertEqual(blazy()->config('admin_css', TRUE), TRUE, t('Admin CSS is enabled.'));
+    $this->assertEqual(blazy()->config('responsive_image', FALSE), TRUE, t('Picture support was disabled, now enabled.'));
+    $this->assertEqual(blazy()->config('pages'), BlazyDefault::PAGES, t('Pages for BlazyFilter match default.'));
+
+    // Verifies our dot notation array works.
+    $this->assertEqual(blazy()->config('blazy.saveViewportOffsetDelay'), 50, t('blazy.saveViewportOffsetDelay dot notation value matches 50.'));
+
+    // Must have blazy on the saved settings.
+    $this->assertTrue(array_key_exists('blazy', $config), t('Blazy JS option array is correctly saved.'));
+
+    // Also verifies that the cast values match the variable_get() on saving.
+    $this->assertEqual(variable_get('blazy.settings', []), $config, t('Typecast values match variable_get() values.'));
+  }
+
+  /**
+   * Tests Blazy PSR-4.
+   *
+   * @covers \Drupal\blazy\Blazy::getHtmlId
+   */
+  public function testNamespace() {
+    $id = 'my_id ';
+    $return_id = Blazy::getHtmlId('blazy', $id);
+    $this->assertEqual($return_id, 'my-id', t('Html ID changed from my_id to my-id.'));
+  }
+
+  /**
+   * Test widthFromDescriptors.
+   *
+   * @covers \Drupal\blazy\Blazy::widthFromDescriptors
+   * @dataProvider providerTestWidthFromDescriptors
+   */
+  public function testWidthFromDescriptors() {
+    // Simpletest doesn't support annotation nor @dataProvider, let's loop.
+    foreach ($this->providerTestWidthFromDescriptors() as $data) {
+      $result = Blazy::widthFromDescriptors($data[0]);
+      $this->assertEqual($result, $data[1], t('@result returned from input @input', [
+        '@result' => is_bool($result) ? 'FALSE' : $result,
+        '@input' => $data[0],
+      ]));
+    }
+  }
+
+  /**
+   * Provide test cases for ::testWidthFromDescriptors().
+   */
+  public function providerTestWidthFromDescriptors() {
+    return [
+      [1024, 1024],
+      ['1024', 1024],
+      ['769w', 769],
+      ['640w 2x', 640],
+      ['2x 640w', 640],
+      ['xYz123', FALSE],
+    ];
+  }
+
+  /**
+   * Tests cases for lightboxes.
+   *
+   * @covers \Drupal\blazy\BlazyManager::getLightboxes
+   */
+  public function testGetLightboxes() {
+    $lightboxes = blazy()->getLightboxes();
+
+    $this->assertTrue(!in_array('nixbox', $lightboxes), 'No lightbox nixbox.');
+  }
+
+  /**
+   * Tests cases for attachments.
+   *
+   * @covers \Drupal\blazy\BlazyManager::attach
+   */
+  public function testAttach() {
+    $attach = [
+      'blazy' => TRUE,
+      'grid'  => 0,
+      'media' => TRUE,
+      'ratio' => 'fluid',
+      'style' => 'column',
+    ];
+
+    $attachments = blazy()->attach($attach);
+    // Verifies the required libraries are attached.
+    $this->assertTrue(array_key_exists('library', $attachments), 'Attachments has library defined.');
+    $this->assertTrue(array_key_exists('blazy', $attachments['js'][0]['data']), 'Attachments has blazy settings in JS data.');
+
+    // Requires PHP 5.5+.
+    $this->assertTrue(array_search('media', array_column($attachments['library'], 1)) !== FALSE, 'Blazy media is attached.');
+    $this->assertTrue(array_search('ratio', array_column($attachments['library'], 1)) !== FALSE, 'Blazy ratio is attached.');
+    $this->assertTrue(array_search('load', array_column($attachments['library'], 1)) !== FALSE, 'Blazy library is attached.');
+    $this->assertTrue(array_search('column', array_column($attachments['library'], 1)) !== FALSE, 'Blazy column is attached.');
+
+    // Grid should not be loaded.
+    $this->assertFalse(array_search('grid', array_column($attachments['library'], 1)) === FALSE, 'Blazy grid should NOT be attached.');
+  }
+
+  /**
+   * Tests cases for config.
+   *
+   * @covers \Drupal\blazy\BlazyManager::config
+   */
+  public function testConfig() {
+    $blazy = blazy()->config('blazy');
+    $this->assertNotNull($blazy['loadInvisible'], 'blazy.loadInvisible exists');
+
+    $admin_css = blazy()->config('admin_css');
+    $this->assertTrue($admin_css, 'Blazy admin CSS is enabled by default.');
+
+    $responsive_image = blazy()->config('responsive_image');
+    $this->assertFalse($responsive_image, 'Picture is disabled by default.');
+  }
+
+}

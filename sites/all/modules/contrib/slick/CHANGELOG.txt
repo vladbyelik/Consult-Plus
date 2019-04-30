@@ -1,0 +1,88 @@
+
+Slick 7.x-3.0-dev, 2019-04-27
+-----------------------------
+- Updated docs.
+- Updated Ajaxin integration.
+- Fixed for colorbox regression with indices due to the previous slick.colorbox
+  library weight change.
+
+Slick 7.x-3.0-dev, 2019-04-22
+-----------------------------
+- Issue #3045487 by calbasi: Error: Class '\''Drupal\slick\SlickManager'\'' not
+  found in slick().
+
+Slick 7.x-3.0-dev, 2019-04-01
+-----------------------------
+- Fixes for slidesToShow > 1, centerMode, clones with Blazy IO.
+
+Slick 7.x-3.0-dev, 2019-03-30
+-----------------------------
+- Updated to the latest Blazy 03/30.
+- Removed Drupal.blazy.init.revalidate() for Drupal.blazy.init.load() as being
+  too expensive, also for IO compatibility.
+
+Slick 7.x-3.0-dev, 2019-03-23
+-----------------------------
+- Added caption_attributes for easy preprocess overrides.
+- Micro optimizations.
+- Fixed for docs.
+
+Slick 7.x-3.0-dev, 2019-03-18
+-----------------------------
+- Fixed for typos, and cleaned up TODOs.
+
+Slick 7.x-3.0-dev, 2019-03-17
+-----------------------------
+- Updated to the latest Blazy 2019-03-17 to reduce dups.
+
+Slick 7.x-3.0-dev, 2019-03-15
+-----------------------------
+- Added Slick::loadWithFallback(), and minor fixes.
+
+Slick 7.x-3.0-dev, 2019-03-12
+-----------------------------
+- Added back deprecated functions to anticipate potential issues.
+- Added isset check to Slick::getOptions().
+
+Slick 7.x-3.0-beta1, 2019-03-07
+-------------------------------
+- Made Slick and Slick UI extensible.
+
+Slick 7.x-3.0-dev, 2019-03-06
+-----------------------------
+- Renamed getOptionsetOptions() to getOptionsetByGroupOptions().
+- Updated to the latest Blazy change 03-06 with BlazyAdminBase::openingForm().
+- Added hook_slick_build_alter() to modify the entire slick outputs.
+
+Slick 7.x-3.0-dev, 2019-03-02
+-----------------------------
+- Added proper check for captions for edge case settings hold old references
+  to fields while they can be deleted anytime.
+
+Slick 7.x-3.0-dev, 2019-02-16
+-----------------------------
+- Simplified CRUD methods.
+
+Slick 7.x-3.0-dev, 2019-01-12
+-----------------------------
+- Added weight to Slick library CSS to prevent it from overriding module CSS.
+- Added group lightbox for Slick skin for Slick Lightbox potential skins.
+
+Slick 7.x-3.0-dev, 2019-01-19
+-----------------------------
+- Deprecated old Slick carousel formatter to the new ones suffixed with field
+  type: slick_file, slick_image, slick_field_collection, slick_paragraphs so
+  that each can have a unique class. Previously just named `slick' and possible
+  with module_load_include(). Now using autoloaded classes.
+- Moved most reusable JS and CSS into Blazy.
+- Moved extra skins into slick_extras.module, not slick_example.
+- Removed general options, and moved js-related options into the main settings.
+- Added theme_slick_thumbnail() and theme_slick_vanilla() to reduce complexity
+  at theme_slick_slide(), and more fine grained theming.
+- Renamed hook_slick_attach_load_info_alter() to hook_slick_attach_alter().
+- Removed theme_slick_image() for theme_blazy().
+- Removed slick-grid.tpl.php for function theme_slick_grid().
+- Changed slick-item.tpl.php into slick-slide.tpl.php, and use
+  theme_slick_slide() by default now.
+- Changed slick.tpl.php into function theme_slick() by default now.
+- Initial commit.

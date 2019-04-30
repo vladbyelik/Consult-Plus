@@ -1,0 +1,22 @@
+name = Blazy
+description = Provides Blazy integration for lazy loading and multi-serving images.
+core = 7.x
+package = Blazy
+php = 5.6
+
+autoload = TRUE
+registry_autoload[] = PSR-4
+
+dependencies[] = drupal:image
+dependencies[] = libraries:libraries (>=2.x)
+
+test_dependencies[] = registry_autoload:registry_autoload
+test_dependencies[] = media:media
+test_dependencies[] = picture:picture
+files[] = tests/Blazy.test
+
+; Information added by Drupal.org packaging script on 2019-04-27
+version = "7.x-1.0"
+core = "7.x"
+project = "blazy"
+datestamp = "1556406485"

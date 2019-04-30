@@ -1,0 +1,262 @@
+<?php
+
+/**
+ * @file
+ * Installation actions for Slick.
+ */
+
+use Drupal\slick\SlickDefault;
+use Drupal\slick\Entity\Slick;
+
+/**
+ * Implements hook_requirements().
+ */
+function slick_requirements($phase) {
+  if ($phase != 'runtime') {
+    return [];
+  }
+
+  $requirements = [];
+  // Ensure translations do not break at install time.
+  $t = get_t();
+
+  $library_path = libraries_get_path('slick') ?: libraries_get_path('slick-carousel');
+  $exists = $library_path && is_file($library_path . '/slick/slick.min.js');
+  $requirements['slick_library'] = [
+    'title'       => $t('Slick library'),
+    'description' => $exists ? '' : $t('The <a href="@url">Slick library</a> should be installed at <strong>/sites/all/libraries/slick/slick/slick.min.js</strong>, or any path supported by libraries.module.', [
+      '@url' => 'https://github.com/kenwheeler/slick/',
+    ]),
+    'severity'    => $exists ? REQUIREMENT_OK : REQUIREMENT_ERROR,
+    'value'       => $exists ? $t('Installed') : $t('Not installed'),
+  ];
+
+  // Check for the minimum required jQuery version.
+  $jquery_version = variable_get('jquery_update_jquery_version', '1.10');
+  if (!version_compare($jquery_version, '1.7', '>=')) {
+    $requirements['slick_jquery_version'] = [
+      'description' => $t('Incorrect jQuery version detected. Slick requires jQuery 1.7 or higher. Please change your <a href="!settings">jQuery Update settings</a>.', [
+        '!settings' => url('admin/config/development/jquery_update'),
+      ]),
+      'severity'    => REQUIREMENT_ERROR,
+      'value'       => $t('Not installed. Please enable jQuery 1.7 or higher.'),
+      'title'       => $t('Slick jQuery version'),
+    ];
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ */
+function slick_install() {
+  variable_set('slick.settings', SlickDefault::formSettings());
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function slick_uninstall() {
+  variable_del('slick.settings');
+}
+
+/**
+ * Returns schema for slick.
+ */
+function _slick_schema() {
+  return [
+    'description' => 'Store optionsets for slick instances.',
+    'export' => [
+      'object' => 'Drupal\slick\Entity\Slick',
+      'key' => 'name',
+      'key name' => 'Optionset',
+      'primary key' => 'name',
+      'identifier' => 'optionset',
+      'admin_title' => 'label',
+      'default hook' => 'slick_optionsets',
+      'bulk export' => TRUE,
+      'api' => [
+        'owner' => 'slick',
+        'api' => 'slick_optionset',
+        'minimum_version' => 1,
+        'current_version' => 3,
+      ],
+    ],
+    'fields' => [
+      'name' => [
+        'description' => 'The machine-readable option set name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'label' => [
+        'description' => 'The human-readable label for this option set.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'breakpoints' => [
+        'description' => 'The number of defined breakpoints.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'skin' => [
+        'description' => 'The slick skin.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'collection' => [
+        'description' => 'The optionset collection.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => FALSE,
+      ],
+      'optimized' => [
+        'type' => 'int',
+        'description' => 'If optimized',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'options' => [
+        'description' => 'The options array.',
+        'type' => 'blob',
+        'size' => 'big',
+        'serialize' => TRUE,
+      ],
+    ],
+    'primary key' => ['name'],
+  ];
+}
+
+/**
+ * Implements hook_schema().
+ */
+function slick_schema() {
+  $schema = [];
+  $schema[Slick::TABLE] = _slick_schema();
+  return $schema;
+}
+
+/**
+ * Enable the Blazy module if it is not already enabled.
+ *
+ * Tasks:<br>
+ * - Added theme_slick_thumbnail() and theme_slick_vanilla() to reduce
+ *   complexity at theme_slick_slide(), and more fine grained theming.<br>
+ * - Removed theme_slick_image() for theme_blazy().<br>
+ * - Changed slick.tpl.php into theme_slick().<br>
+ * - Removed slick-grid.tpl.php for theme_slick_grid().<br>
+ * - Changed slick-item.tpl.php into slick-slide.tpl.php for clearer intention.
+ */
+function slick_update_7300() {
+  global $conf;
+
+  if (isset($conf['slick_admin_css'])) {
+    $values = SlickDefault::formSettings();
+    $values['slick_css'] = variable_get('slick_css', TRUE);
+    $values['module_css'] = variable_get('slick_module_css', TRUE);
+
+    // Rebuild new merged variables.
+    variable_set('slick.settings', $values);
+
+    // Delete old variables.
+    variable_del('slick_admin_css');
+    variable_del('slick_css');
+    variable_del('slick_module_css');
+  }
+
+  // Rebuild theme registry.
+  drupal_theme_rebuild();
+  // Rebuild old Slick UI class registry.
+  registry_rebuild();
+
+  // Bail out if Blazy is not available.
+  $exists = module_enable(['blazy']);
+  if (!$exists) {
+    throw new DrupalUpdateException('The <a href="https://drupal.org/project/blazy">Blazy module</a> must be downloaded and available for Slick updates to proceed.');
+  }
+}
+
+/**
+ * Add db field `collection` and `optimized` to the slick_optionset table.
+ */
+function slick_update_7301() {
+  $collection_field = [
+    'type' => 'varchar',
+    'description' => 'The optionset collection.',
+    'length' => 64,
+    'not null' => FALSE,
+  ];
+
+  // Check that the field hasn't been updated in an aborted run of this update.
+  if (!db_field_exists(Slick::TABLE, 'collection')) {
+    db_add_field(Slick::TABLE, 'collection', $collection_field);
+  }
+
+  $optimized_field = [
+    'type' => 'int',
+    'description' => 'If optimized',
+    'not null' => TRUE,
+    'default' => 0,
+  ];
+
+  if (!db_field_exists(Slick::TABLE, 'optimized')) {
+    db_add_field(Slick::TABLE, 'optimized', $optimized_field);
+  }
+}
+
+/**
+ * Rebuild the optionsets and registry to migrate from Slick 2.x to 3.x.
+ *
+ * Tasks:<br>
+ * - Convert Slick optionsets from stdClass to \Drupal\slick\Entity\Slick.<br>
+ */
+function slick_update_7302() {
+  ctools_include('export');
+
+  $run_update = FALSE;
+  foreach (Slick::loadMultiple() as &$optionset) {
+    if ($optionset->name == 'default') {
+      continue;
+    }
+
+    // Move some general options into the main settings to be usable at JS.
+    $settings = &$optionset->options['settings'];
+    // Marks the update to run when it has old references.
+    if (isset($optionset->options['general']) && $general = $optionset->options['general']) {
+      $settings['downArrow'] = $general['goodies']['arrow-down'];
+      $settings['randomize'] = $general['goodies']['random'];
+      $settings['downArrowTarget'] = $general['arrow_down_target'];
+      $settings['downArrowOffset'] = $general['arrow_down_offset'];
+
+      // Move optimized out from the option to top level field.
+      $optimized = isset($optionset->optimized) ? $optionset->optimized : 0;
+      $optimized = isset($optionset->options['optimized']) ? $optionset->options['optimized'] : $optimized;
+      $collection = isset($optionset->collection) ? $optionset->collection : '';
+      unset($optionset->options['optimized']);
+
+      $optionset->collection = $collection;
+      $optionset->optimized = $optimized;
+
+      // Removed non-supported options under general, some moved above.
+      unset($optionset->options['general']);
+
+      ctools_export_crud_save(Slick::TABLE, $optionset);
+      $run_update = TRUE;
+    }
+  }
+
+  if ($run_update) {
+    // Rebuild CTools cache for the Slick::TABLE.
+    ctools_export_load_object_reset(Slick::TABLE);
+  }
+
+  // Repeat rebuilding theme registry.
+  drupal_theme_rebuild();
+  // Repeat rebuilding old Slick UI class registry.
+  registry_rebuild();
+}

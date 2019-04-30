@@ -1,0 +1,167 @@
+
+Blazy 7.x-1.0-dev, 2019-04-27
+-----------------------------
+- Fixed for Colorbox integration, another anomaly only happens at D7.
+
+Blazy 7.x-1.0-dev, 2019-04-19
+-----------------------------
+- Updated blazy.html.twig with the new optional use_loading option.
+- Added option use_loading to make it easily overridden.
+- Moved IO media specific methods from bio.js to bio.media.js.
+- Added ISSUE_TEMPLATE.md.
+- Fixed for issues with Drupal.blazy value assignments, only happens at D7.
+  You'll never know.
+
+Blazy 7.x-1.0-dev, 2019-04-12
+-----------------------------
+- Added BlazyFilterInterface.php for better doc comments.
+- Fixed for BlazyFilter incorrect delta.
+- Added AJAX support for old bLazy as well.
+- Fixed for space delimited CSS classes.
+- Added Bio.prototype.intersecting() to avoid full method overrides.
+- Improved Bio fallback to old Blazy.
+- Improved attributes handling.
+
+Blazy 7.x-1.0-dev, 2019-04-06
+-----------------------------
+- Added check before calling first URI for lightbox gallery.
+
+Blazy 7.x-1.0-dev, 2019-04-05
+-----------------------------
+- Updated IO AJAX overrides.
+
+Blazy 7.x-1.0-dev, 2019-04-03
+-----------------------------
+- Fixed for image error handling.
+- Added support for Views Infinite Scroll, alike.
+
+Blazy 7.x-1.0-dev, 2019-04-01
+-----------------------------
+- Added check to drupalSettings before usage.
+
+Blazy 7.x-1.0-dev, 2019-03-31
+-----------------------------
+- Fixed for Picture integration.
+- Optimized IO integration with multiple instances.
+- Fixed for multi-breakpoint background derailed from original implementation.
+- Fixed for docs.
+
+Blazy 7.x-1.0-dev, 2019-03-30
+-----------------------------
+- Fixed for background SRC overlap when using multi-serving background images.
+- Converted IO integration into plugin to declutter and re-use.
+
+Blazy 7.x-1.0-dev, 2019-03-27
+-----------------------------
+- Backported IO.
+
+Blazy 7.x-1.0-dev, 2019-03-25
+-----------------------------
+- Backported configurable placeholder.
+- Moved BlazyManager::setDimensionsOnce() to BlazyFormatterManager.
+
+Blazy 7.x-1.0-dev, 2019-03-21
+-----------------------------
+- Micro optimizations with breakpoint and crop style checks.
+
+Blazy 7.x-1.0-dev, 2019-03-20
+-----------------------------
+- Updated docs.
+- Split methods for readability.
+
+Blazy 7.x-1.0-dev, 2019-03-18
+-----------------------------
+- Updated admin CSS.
+
+Blazy 7.x-1.0-dev, 2019-03-17
+-----------------------------
+- Fixed for dups.
+- Cleaned ups TODOs.
+- Fixed for likely overridden admin CSS.
+
+Blazy 7.x-1.0-dev, 2019-03-15
+-----------------------------
+- Fixed for conflict with Bootstrap CSS .media which makes Blazy collapsed if
+  not using aspect ratio.
+- Fixed for multiple blazybox.
+- Fixed for Blazy Filter URI.
+
+Blazy 7.x-1.0-dev, 2019-03-14
+-----------------------------
+- Backported for unclean Blazy Filter grid regardless no Caption filters.
+
+Blazy 7.x-1.0-dev, 2019-03-13
+-----------------------------
+- Added room for sub-modules to extend blazy settings easily.
+- Fixed for Blazy Filter with Grid of inline iamges taking over the contents.
+
+Blazy 7.x-1.0-dev, 2019-03-12
+-----------------------------
+- Fixed for cached Blazy Filter.
+- Changed image item to be optional to reduce barriers to the API, the only
+  required is URI.
+- Fixed for attributes insanity.
+
+Blazy 7.x-1.0-dev, 2019-03-11
+-----------------------------
+- Added check to image style in case deleted while being referenced.
+- Added supports for lightbox Media gallery embedded within Blazy Grid with
+  "Use field template" disabled. This opens up Views goodness: limit field
+  amount to display, Views markup, etc. without using field template.
+- Added hook_blazy_settings_views_alter() to modify views-related settings.
+- Cleaned up dup lines at blazy.admin.js.
+
+Blazy 7.x-1.0-dev, 2019-03-09
+-----------------------------
+- Fixed for multiple Blazy filters.
+- Fixed for Views lightbox gallery embedded within Blazy Grid with `Use field
+  template` being disabled.
+
+Blazy 7.x-1.0-dev, 2019-03-08
+-----------------------------
+- Fixed for BlazyFilter grid TODO to integrate grid with the existing grid.
+
+Blazy 7.x-1.0-dev, 2019-03-06
+-----------------------------
+- Fix for Views rewrite results striping out style required by aspect ratio.
+- Fixed for regression broken formatters when embedded inside Views Blazy Grid.
+- Re-use first_uri, first_item things for colorbox/zoom-like gallery.
+- Changed BlazyAdminBase::openingForm() parameters.
+- Added hook_blazy_build_alter() to modify the entire Blazy outputs.
+- Refactored BlazyGrid to be usable for non-grid, plain list.
+- Moved re-usable methods into BlazyManagerbase, for Views style plugins.
+- Added #pre_render to BlazyGrid for easy overrides before reaching .tpl.
+
+Blazy 7.x-1.0-dev, 2019-03-02
+-----------------------------
+- Fixed for Entity vs. File entity outputs for link or text fields.
+- Split BlazyStylePluginTrait into BlazyStyleBaseTrait, BlazyStyleOptionsTrait.
+  Be sure to run `drush aur`, ONLY if using "autoload" module, otherwise ignore
+  if using "registry_autoload" or "xautoload".
+
+Blazy 7.x-1.0-dev, 2019-03-01
+-----------------------------
+- Fixed for missing titles.
+- Fixed for media captions.
+
+Blazy 7.x-1.0-dev, 2019-02-24
+-----------------------------
+- Added re-usable BlazyStylePluginBase::buildSettings().
+
+Blazy 7.x-1.0-dev, 2019-02-15
+-----------------------------
+- Added Blazybox for full screen video preview: Intense.
+- Changed settings.player to be more flexible to support a hybrid of media
+  switcher and quasi-lightbox (lightbox-like but inline) like Zooming.
+
+Blazy 7.x-1.0-dev, 2019-02-13
+-----------------------------
+- Fixed for lightbox/ photoswipe video size regression from 8.x branch.
+
+Blazy 7.x-1.0-dev, 2019-01-25
+-----------------------------
+- Initial dev release.
+
+Blazy 7.x-1.0-dev, 2019-01-14
+-----------------------------
+- Initial backport.

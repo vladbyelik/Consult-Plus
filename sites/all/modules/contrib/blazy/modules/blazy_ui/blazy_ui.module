@@ -1,0 +1,103 @@
+<?php
+
+/**
+ * @file
+ * Provides the Blazy UI.
+ */
+
+use Drupal\blazy_ui\Form\BlazySettingsForm;
+
+/**
+ * Returns one of the Blazy service objects mainly used by procedural hooks.
+ *
+ * @return class
+ *   The required Blazy class instance.
+ */
+function blazy_ui() {
+  static $blazy_ui;
+
+  if (!isset($blazy_ui)) {
+    $blazy_ui = new BlazySettingsForm(blazy());
+  }
+
+  return $blazy_ui;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function blazy_ui_menu() {
+  $items['admin/config/media/blazy'] = [
+    'title' => 'Blazy UI',
+    'description' => 'Configure the Blazy UI.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['blazy_ui_build_form'],
+    'access arguments' => ['administer blazy'],
+    'type' => MENU_LOCAL_TASK,
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function blazy_ui_permission() {
+  return [
+    'administer blazy' => [
+      'title' => t('Administer the Blazy UI module'),
+    ],
+  ];
+}
+
+/**
+ * Implements hook_library().
+ */
+function blazy_ui_library() {
+  $path = drupal_get_path('module', 'blazy_ui');
+  $info = system_get_info('module', 'blazy_ui');
+
+  $libraries['ui'] = [
+    'title' => 'Blazy UI',
+    'website' => 'http://drupal.org/project/blazy',
+    'version' => !empty($info['version']) ? $info['version'] : '7.x-1.x',
+    'js' => [
+      $path . '/js/blazy.admin.ui.min.js' => ['group' => JS_DEFAULT, 'weight' => 3],
+    ],
+    'css' => [
+      $path . '/css/blazy.admin--vertical-tabs.css' => ['group' => CSS_THEME + 1],
+    ],
+    'dependencies' => [['system', 'jquery.once'], ['blazy', 'admin']],
+  ];
+
+  return $libraries;
+}
+
+/**
+ * Form for Blazy UI module settings.
+ */
+function blazy_ui_build_form() {
+  return blazy_ui()->buildForm();
+}
+
+/**
+ * Submit handler for blazy_ui_build_form().
+ */
+function blazy_ui_submit_form($form, &$form_state) {
+  blazy_ui()->submitForm($form, $form_state);
+}
+
+/**
+ * Implements hook_help().
+ */
+function blazy_ui_help($path, $arg) {
+  if ($path == 'admin/help#blazy_ui') {
+    $output = file_get_contents(dirname(dirname(dirname(__FILE__))) . '/docs/README.md');
+    $output .= file_get_contents(dirname(dirname(dirname(__FILE__))) . '/docs/UPDATING.md');
+    $output .= file_get_contents(dirname(dirname(dirname(__FILE__))) . '/docs/TROUBLESHOOTING.md');
+    $output .= file_get_contents(dirname(dirname(dirname(__FILE__))) . '/docs/CONTRIBUTION.md');
+    $output .= file_get_contents(dirname(dirname(dirname(__FILE__))) . '/docs/ISSUE_TEMPLATE.md');
+    return function_exists('_filter_markdown') ? _filter_markdown($output, NULL) : '<pre>' . $output . '</pre>';
+  }
+  return '';
+}

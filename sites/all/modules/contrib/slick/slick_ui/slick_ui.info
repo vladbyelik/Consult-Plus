@@ -1,0 +1,16 @@
+name = Slick UI
+description = 'Provides Slick carousel configuration UI.'
+core = 7.x
+package = Slick
+configure = admin/config/media/slick/ui
+
+autoload = TRUE
+registry_autoload[] = PSR-4
+
+dependencies[] = slick:slick (>= 3.x)
+
+; Information added by Drupal.org packaging script on 2019-04-27
+version = "7.x-3.0"
+core = "7.x"
+project = "slick"
+datestamp = "1556405591"
