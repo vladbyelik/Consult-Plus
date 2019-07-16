@@ -107,7 +107,6 @@
 <!--          --><?php //print $search_form; ?>
 <!--      --><?php //endif; ?>
 
-
       <ul class="navigation">
           <h3 class="list-headline">navigation</h3>
           <li>Home</li>
@@ -135,9 +134,6 @@
           </ul>
       <?php endif; ?>
   </div>
-
-
-
 
     <div class="container">
         <?php if ($copyright): ?>
