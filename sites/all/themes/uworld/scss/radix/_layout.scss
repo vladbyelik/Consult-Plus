@@ -19,6 +19,7 @@
 
 .about .pane-content {
   display: flex;
+  position: relative;
   @media (max-width: 800px) {
     flex-direction: column;
     justify-content: center;
@@ -120,6 +121,7 @@
 #footer {
   background-color: #262829;
   .container {
+    justify-content: space-between;
     display: flex;
     flex-wrap: wrap;
     padding: 9rem 0;
@@ -131,38 +133,74 @@
       font-weight: 400;
       line-height: 30px;
       text-transform: uppercase;
+      transition: 0.5s;
     }
+    ul li a {
+      color: #838b8c;
+      list-style: none;
+      transition: 0.5s;
+    }
+    ul li a:hover {
+      text-decoration: none;
+      list-style: none;
+      color: #ffac55;
+      transition: 0.5s;
+    }
+
   .newsletter {
     display: flex;
     flex-direction: column;
 
     span:nth-child(2) {
+      max-width: 40rem;
+      width: 100%;
       color: #838b8c;
       font-family: Domine, serif;
       font-size: 15px;
       font-weight: 400;
       line-height: 24px;
+      margin: 3rem 0;
     }
 
     form {
       display: flex;
       border-radius: 25px;
+      color: #5e5e5e;
+      font-family: Montserrat;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 24px;
+      text-transform: uppercase;
 
       input {
-        width: 415px;
-        height: 52px;
+        border: none;
+        max-width: 38rem;
+        width: 100%;
+        height: 5rem;
         border-radius: 25px 0 0 25px;
         background-color: #323334;
+        padding: 0 3rem;
       }
 
       button {
-        border-radius: 0 25px 25px 0;
+        width: 15rem;
+        margin-left: -40px;
+        background-color: #16d428;
+        font-size: 15px;
+        transition: 0.3s;
+        border-radius: 25px;
+        color: #ffffff;
+        font-family: Montserrat;
+        font-weight: 400;
+        line-height: 35.45px;
+        text-transform: uppercase;
+        border: none;
       }
     }
   }
   }
 
-  .newsletter span:first-child, .list-headline {
+  .newsletter span:first-child, .list-headline, .block__title {
       color: #e1e1e1;
       font-family: Montserrat, sans-serif;
       font-size: 20px;
@@ -304,9 +342,23 @@
 }
 
 .follow-us {
-  width: 17rem;
   li a {
     color: #838b8c;
+  }
+  h4 {
+    margin: 0;
+  }
+  .menu li a {
+    padding: 0;
+  }
+  a.active:hover {
+    background: none;
+  }
+  .region {
+    display: flex;
+    .block {
+      width: 17rem;
+    }
   }
 }
 
@@ -373,10 +425,7 @@
         text-transform: uppercase;
         letter-spacing: -0.14px;
         transition: 0.4s;
-        p {
-          height: 52px;
-          border-radius: 25px;
-        }
+        border: 1px solid #00a6d3;
       }
 
       li:last-child {
@@ -393,6 +442,8 @@
         justify-content: center;
         background-color: #16d428;
         text-align: center;
+        height: 4rem;
+        border-radius: 25px;
         a {
           color: #ffffff;
           font-family: Montserrat, sans-serif;
@@ -413,10 +464,16 @@
         padding-top: 1rem;
         p a {
           text-decoration: none;
-          font-size: 3rem;
+          font-size: 2rem;
           color: #ffffff;
+          text-align: center;
+        }
+        p:last-child {
           border: 1px solid #ffffff;
           border-radius: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
       }
     }
@@ -466,12 +523,39 @@
   letter-spacing: 0.6px;
 }
 
-.pane-clients {
-  .view-content {
+.slick img {
+  border-radius: 50%;
+}
+
+.slick-dots .slick-active {
+  border: 3px solid #16d428;
+  background: none;
+}
+
+.slick-dots li {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  transition: 0.5s;
+  button:before {
+    display: none;
+  }
+}
+
+.slick-dots li:hover{
+  width: 15px;
+  height: 15px;
+  border: 2px solid #16d428;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+.slick__slide {
+  .slide__content {
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
-    .views-row {
+    .grid__content .slick__slide {
         content: "";
         display: block;
         width: 100%;

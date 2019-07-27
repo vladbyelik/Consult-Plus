@@ -9,6 +9,9 @@ base theme  = radix
 
 ; Regions
 regions[content] = Content
+regions[name] = Header name
+regions[location] = Location
+regions[menu_new] = Footer
 
 ; Breakpoints
 breakpoints[xs] = (max-width: 767px)
