@@ -1,2 +1,84 @@
 // Page Layout
 // -----------------------------------------------------------------------------
+
+
+#breadcrumb {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .container-small {
+    width: 300px;
+  }
+  .container-large {
+    width: 970px;
+  }
+}
+@media (min-width: 992px) {
+  .container-small {
+    width: 500px;
+  }
+  .container-large {
+    width: 1170px;
+  }
+}
+@media (min-width: 1200px) {
+  .container-small {
+    width: 700px;
+  }
+  .container-large {
+    width: 1500px;
+  }
+}
+
+.container-small, .container-large {
+  max-width: 100%;
+}
+
+.container-large {
+  display: flex;
+  padding: 10rem 0;
+}
+
+.round {
+  width: 54px;
+  height: 54px;
+  background-color: #ffac55;
+  border-radius: 50%;
+}
+
+.blog-background {
+  background-image: url("../../assets/images/bgrnd-pages.png");
+  background-size: cover;
+  background-position: center;
+  height: 40rem;
+  .container {
+    padding: 18rem 0;
+    display: flex;
+  }
+  .blog-heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 7px 0 0 -35px;
+    .region-blog-heading {
+      display: flex;
+      justify-content: start;
+      .block__content p {
+        color: #1c1c1c;
+        font-family: Lato;
+        font-size: 36px;
+        font-weight: 300;
+        line-height: 30px;
+        text-transform: uppercase;
+        letter-spacing: -0.9px;
+      }
+    }
+  }
+
+
+}
+
+.container-small {
+  background-color: #e7eff1;
+}

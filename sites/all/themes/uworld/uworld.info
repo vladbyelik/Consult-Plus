@@ -12,6 +12,7 @@ regions[content] = Content
 regions[name] = Header name
 regions[location] = Location
 regions[menu_new] = Footer
+regions[blog_heading] = Section blog
 
 ; Breakpoints
 breakpoints[xs] = (max-width: 767px)

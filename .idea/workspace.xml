@@ -3,50 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b60d89e9-d5d2-4883-a779-9cd9ca8f1df7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/ajax-loader.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/config.rb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/fonts/slick.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/fonts/slick.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/fonts/slick.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/fonts/slick.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/slick-theme.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/slick-theme.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/slick-theme.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/slick.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/slick.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/slick.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/slick.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/libraries/slick/slick.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/css/media.css" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/css/media.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/MediaBrowserPlugin.inc" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/MediaBrowserPlugin.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/MediaBrowserPluginInterface.inc" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/MediaBrowserPluginInterface.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/MediaBrowserUpload.inc" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/MediaBrowserUpload.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/media.browser.inc" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/media.browser.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/media.fields.inc" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/media.fields.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/media.theme.inc" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/media.theme.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/media_views_plugin_display_media_browser.inc" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/media_views_plugin_display_media_browser.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/media_views_plugin_style_media_browser.inc" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/includes/media_views_plugin_style_media_browser.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/media-views-view-media-browser.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/media-views-view-media-browser.tpl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/media.info" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/media.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/media.module" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/media.module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_bulk_upload/media_bulk_upload.info" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_bulk_upload/media_bulk_upload.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_internet/media_internet.info" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_internet/media_internet.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_internet/tests/media_internet_test.info" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_internet/tests/media_internet_test.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_migrate_file_types/includes/media_migrate_file_types.pages.inc" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_migrate_file_types/includes/media_migrate_file_types.pages.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_migrate_file_types/media_migrate_file_types.info" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_migrate_file_types/media_migrate_file_types.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_migrate_file_types/media_migrate_file_types.module" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_migrate_file_types/media_migrate_file_types.module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg/includes/media_wysiwyg.file_usage.inc" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg/includes/media_wysiwyg.file_usage.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg/includes/media_wysiwyg.pages.inc" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg/includes/media_wysiwyg.pages.inc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg/media_wysiwyg.info" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg/media_wysiwyg.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg/media_wysiwyg.module" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg/media_wysiwyg.module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg/media_wysiwyg.test" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg/media_wysiwyg.test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg_view_mode/media_wysiwyg_view_mode.info" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/media_wysiwyg_view_mode/media_wysiwyg_view_mode.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/mediafield/mediafield.info" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/modules/mediafield/mediafield.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/modules/contrib/media/tests/media_module_test.info" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/media/tests/media_module_test.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sites/all/themes/uworld/assets/css/uworld.style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/uworld/assets/css/uworld.style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sites/all/themes/uworld/assets/css/uworld.style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/uworld/assets/css/uworld.style.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/all/themes/uworld/scss/layout/_page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/uworld/scss/layout/_page.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sites/all/themes/uworld/scss/radix/_layout.scss" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/uworld/scss/radix/_layout.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page--front.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page--front.tpl.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page.tpl.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sites/all/themes/uworld/uworld.info" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/uworld/uworld.info" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,11 +26,20 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page--front.tpl.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="437">
-                  <caret line="43" column="16" lean-forward="true" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
+                <state relative-caret-position="555">
+                  <caret line="123" column="9" selection-start-line="123" selection-start-column="9" selection-end-line="123" selection-end-column="9" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page--pages.tpl.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="266">
+                  <caret line="43" column="1" lean-forward="true" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
                 </state>
               </provider>
             </entry>
@@ -77,12 +47,21 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/scss/layout/_page.scss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="175">
+                  <caret line="47" column="1" lean-forward="true" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/scss/radix/_layout.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="464">
-                  <caret line="185" column="21" lean-forward="true" selection-start-line="185" selection-start-column="21" selection-end-line="185" selection-end-column="21" />
+                <state relative-caret-position="-2709">
+                  <caret line="438" column="1" selection-start-line="438" selection-start-column="1" selection-end-line="438" selection-end-column="1" />
                 </state>
               </provider>
             </entry>
@@ -93,24 +72,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mont</find>
-      <find>montse</find>
-      <find>.panel-pa</find>
-      <find>width:</find>
-      <find>views-ro</find>
-      <find>views-row</find>
-      <find>foote</find>
-      <find>to top</find>
-      <find>domin</find>
-      <find>//</find>
-      <find>navbar</find>
-      <find>industry-block</find>
-      <find>pane-</find>
       <find>indu</find>
       <find>.div</find>
       <find>abou</find>
       <find>about</find>
-      <find>none</find>
       <find>navba</find>
       <find>foot</find>
       <find>headli</find>
@@ -123,6 +88,20 @@
       <find>butt</find>
       <find>news</find>
       <find>input</find>
+      <find>contac</find>
+      <find>h3</find>
+      <find>step</find>
+      <find>med</find>
+      <find>800</find>
+      <find>slide</find>
+      <find>grid</find>
+      <find>testi</find>
+      <find>conta</find>
+      <find>relati</find>
+      <find>regio</find>
+      <find>none</find>
+      <find>footer</find>
+      <find>navb</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -134,8 +113,11 @@
         <option value="$PROJECT_DIR$/sites/all/themes/uworld/theme-settings.php" />
         <option value="$PROJECT_DIR$/sites/all/themes/uworld/assets/scss/radix/_layout.scss" />
         <option value="$PROJECT_DIR$/sites/all/themes/uworld/scss/base/_typography.scss" />
-        <option value="$PROJECT_DIR$/sites/all/themes/uworld/scss/radix/_layout.scss" />
         <option value="$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page--front.tpl.php" />
+        <option value="$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page.tpl.php" />
+        <option value="$PROJECT_DIR$/sites/all/themes/uworld/scss/radix/_layout.scss" />
+        <option value="$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page--pages.tpl.php" />
+        <option value="$PROJECT_DIR$/sites/all/themes/uworld/scss/layout/_page.scss" />
       </list>
     </option>
   </component>
@@ -187,6 +169,35 @@
               <item name="themes" type="462c0819:PsiDirectoryNode" />
               <item name="uworld" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="exam" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exam" type="462c0819:PsiDirectoryNode" />
+              <item name="sites" type="462c0819:PsiDirectoryNode" />
+              <item name="all" type="462c0819:PsiDirectoryNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+              <item name="uworld" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="exam" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exam" type="462c0819:PsiDirectoryNode" />
+              <item name="sites" type="462c0819:PsiDirectoryNode" />
+              <item name="all" type="462c0819:PsiDirectoryNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+              <item name="uworld" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="contrib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="exam" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exam" type="462c0819:PsiDirectoryNode" />
+              <item name="sites" type="462c0819:PsiDirectoryNode" />
+              <item name="all" type="462c0819:PsiDirectoryNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+              <item name="uworld" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="page" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -228,18 +239,18 @@
       <workItem from="1556700510364" duration="598000" />
       <workItem from="1563267636233" duration="687000" />
       <workItem from="1564217823676" duration="258000" />
-      <workItem from="1564218168219" duration="12833000" />
+      <workItem from="1564218168219" duration="19792000" />
+      <workItem from="1564308994534" duration="6810000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54967000" />
+    <option name="totallyTimeSpent" value="68736000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49834436" weight="0.19402985" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49834436" visible="true" weight="0.19402985" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50165564" side_tool="true" weight="0.25262576" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -263,12 +274,20 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page--pages.tpl.php</url>
+          <line>47</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/templates/page/node.tpl.php" />
     <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/assets/scss/radix/_layout.scss" />
-    <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page.tpl.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/scss/base/_typography.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="403">
@@ -286,17 +305,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/scss/radix/_layout.scss">
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page--front.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="185" column="21" lean-forward="true" selection-start-line="185" selection-start-column="21" selection-end-line="185" selection-end-column="21" />
+        <state relative-caret-position="555">
+          <caret line="123" column="9" selection-start-line="123" selection-start-column="9" selection-end-line="123" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page--front.tpl.php">
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="43" column="16" lean-forward="true" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
+        <state relative-caret-position="19">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/scss/radix/_layout.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2709">
+          <caret line="438" column="1" selection-start-line="438" selection-start-column="1" selection-end-line="438" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/scss/layout/_page.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="47" column="1" lean-forward="true" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/uworld/templates/page/page--pages.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="43" column="1" lean-forward="true" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
         </state>
       </provider>
     </entry>

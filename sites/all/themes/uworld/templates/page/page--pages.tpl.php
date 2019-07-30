@@ -12,6 +12,16 @@
 ?>
 <header id="header" class="header" role="header">
     <div>
+        <div class="contacts container">
+            <div class="email">
+                <?php $topPageEmail = check_plain(theme_get_setting('header_email', 'uworld')); ?>
+                <span>Email<small>: </small><span><?php print $topPageEmail; ?></span></span>
+            </div>
+            <div class="phone">
+                <?php $topPagePhone = check_plain(theme_get_setting('header_phone', 'uworld')); ?>
+                <span>Phone<small>: </small><span><?php print $topPagePhone; ?></span></span>
+            </div>
+        </div>
         <nav class="navbar navbar-default" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -22,9 +32,14 @@
                     <span class="icon-bar"></span>
                 </button>
                 <?php if ($site_name || $logo): ?>
+                    <!--          <a href="--><?php //print $front_page; ?><!--" class="navbar-brand" rel="home" title="--><?php //print t('Home'); ?><!--">-->
                     <?php if ($logo): ?>
                         <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" id="logo"/>
                     <?php endif; ?>
+                    <!--            --><?php //if ($site_name): ?>
+                    <!--              <span class="site-name">--><?php //print $site_name; ?><!--</span>-->
+                    <!--            --><?php //endif; ?>
+                    <!--          </a>-->
                 <?php endif; ?>
             </div> <!-- /.navbar-header -->
 
@@ -38,8 +53,23 @@
             </div><!-- /.navbar-collapse -->
         </nav><!-- /.navbar -->
     </div> <!-- /.container -->
+    <section class="blog-background">
+        <div class="container">
+            <?php if ($page['blog_heading']): ?>
+                <div class="round"></div>
+                <div class="blog-heading">
+                    <?php print render($page['blog_heading']); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </section>
 </header>
 
+
+
+
+
+<div class="container-large container">
     <div id="main-wrapper">
         <div id="main" class="main">
             <div class="container">
@@ -76,6 +106,14 @@
             </div>
         </div> <!-- /#main -->
     </div> <!-- /#main-wrapper -->
+    
+    <div class="container-small">
+        <?php if ($search_form): ?>
+            <?php print $search_form; ?>
+        <?php endif; ?>
+    </div>
+    
+</div>
 
 
 
